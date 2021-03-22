@@ -11,10 +11,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 public class AddImage extends Fragment {
 
 	public String uri;
+	public TextView header;
+	public TextView text;
 	ImageButton imageButton;
 	Button button;
 
@@ -28,10 +31,10 @@ public class AddImage extends Fragment {
 		super.onActivityCreated(savedInstanceState);
 		imageButton = getActivity().findViewById(R.id.buttonImage);
 		button = getActivity().findViewById(R.id.buttonAdd);
+		header = getActivity().findViewById(R.id.add_header);
+		text = getActivity().findViewById(R.id.add_text);
 		uri = null;
 	}
-
-
 
 	public void setImage(Uri data) {
 		uri = data.toString();

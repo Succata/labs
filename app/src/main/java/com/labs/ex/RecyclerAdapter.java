@@ -1,7 +1,6 @@
 package com.labs.ex;
 
 import android.net.Uri;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -12,15 +11,15 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerHolder> {
 	@Override
 	public RecyclerHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 		LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-		Log.d("tag", "-----created");
 		return new RecyclerHolder(inflater.inflate(R.layout.holder, parent, false));
 	}
 
 	@Override
 	public void onBindViewHolder(RecyclerHolder holder, int position) {
 		holder.imageView.setImageURI(Uri.parse(Main.data.get(holder.getAdapterPosition()).imageUri));
+		holder.header.setText(Main.data.get(holder.getAdapterPosition()).header);
+		holder.body.setText(Main.data.get(holder.getAdapterPosition()).body);
 		Main.data.size();
-		Log.d("tag", "-----bind");
 	}
 
 	@Override
@@ -28,8 +27,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerHolder> {
 		return Main.data.size();
 	}
 
-	public void addPost(String uri) {
-		Main.data.add(new Post(uri));
+	public void addPost(String uri, String header, String body) {
+		Main.data.add(new Post(uri, header, body));
 		notifyDataSetChanged();
 	}
 }

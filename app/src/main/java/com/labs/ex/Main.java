@@ -44,10 +44,12 @@ public class Main extends AppCompatActivity {
 		getSupportFragmentManager().beginTransaction().replace(R.id.fragment, addImage).commit();
 	}
 	public void completedAddPost(View view) {
-		getSupportFragmentManager().beginTransaction().replace(R.id.fragment, scrollFragment).commit();
-		if (addImage.uri != null)
-			scrollFragment.recyclerAdapter.addPost(addImage.uri);
-		else Toast.makeText(getApplicationContext(), "Отменено", Toast.LENGTH_SHORT).show();
+		if (addImage.uri != null && !addImage.header.getText().equals("") && !addImage.text.getText().equals("")) {
+			scrollFragment.recyclerAdapter.addPost(addImage.uri, addImage.header.getText().toString(), addImage.text.getText().toString());
+			addImage.header.setText("");
+			addImage.text.setText("");
+			getSupportFragmentManager().beginTransaction().replace(R.id.fragment, scrollFragment).commit();
+		} else Toast.makeText(getApplicationContext(), "Не все поля заполнены", Toast.LENGTH_SHORT).show();
 	}
 
 	@Override

@@ -4,18 +4,23 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".AddImage">
+        tools:context=".AddImage"
+        style="@style/editText"
+        app:layout_constraintHeight_max="300dp"
+        android:paddingStart="0dp"
+        android:paddingEnd="0dp">
 
     <ImageButton
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/buttonImage"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:onClick="addImage"
-            app:layout_constraintHorizontal_bias="0.0"
-            android:src="@drawable/iconmonstr_picture_8" />
+            app:layout_constraintHorizontal_bias="0.157"
+            android:src="@drawable/iconmonstr_picture_8"
+            app:layout_constraintHeight_max="300dp" />
 
     <Button
             android:text="@string/button_add_image"
@@ -26,4 +31,31 @@
             app:layout_constraintEnd_toEndOf="parent"
             style="@style/buttonStyle"
             android:onClick="completedAddPost" />
+
+    <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/add_header"
+
+            app:layout_constraintTop_toBottomOf="@+id/buttonImage"
+            style="@style/editText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.473"
+            android:hint="Хедер"
+            android:maxLines="4"
+            android:minLines="1" />
+
+    <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/add_text"
+            app:layout_constraintTop_toBottomOf="@+id/add_header"
+            style="@style/editText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.473"
+            android:hint="Текст"
+            android:maxLines="4"
+            android:minLines="1" />
 </androidx.constraintlayout.widget.ConstraintLayout>
