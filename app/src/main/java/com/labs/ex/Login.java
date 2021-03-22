@@ -1,49 +1,45 @@
 package com.labs.ex;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class Login extends AppCompatActivity {
+public class Login extends Fragment {
 
 	EditText login;
 	EditText password;
 	Toast toast = null;
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_login);
-		login = findViewById(R.id.editText_login);
-		password = findViewById(R.id.editText_password);
-		toast = Toast.makeText(getApplicationContext(), "", Toast.LENGTH_SHORT);
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		return inflater.inflate(R.layout.fragment_login, container, false);
 	}
 
-	public void signIn(View view) {
+	@Override
+	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		login = getActivity().findViewById(R.id.editText_login);
+		password = getActivity().findViewById(R.id.editText_password);
+		toast = Toast.makeText(getActivity().getApplicationContext(), "", Toast.LENGTH_SHORT);
+	}
+
+	public boolean signIn(View view) {
 		if ((login.getText().toString().equals("") || password.getText().toString().equals("")) && toast.getView().getWindowVisibility() != View.VISIBLE) {
 			toast.setText(getString(R.string.smthAreNull));
 			toast.show();
 		} else if (login.getText().toString().equals("admin") && password.getText().toString().equals("admin")) {
-			startActivity(new Intent(getApplicationContext(), Main.class));
+			return true;
 		} else if (toast.getView().getWindowVisibility() != View.VISIBLE) {
 			toast.setText(getString(R.string.loginAndPassword_exception));
 			toast.show();
 		}
-	}
-
-	protected void onRestoreInstanceState(Bundle savedInstanceState) {
-		super.onRestoreInstanceState(savedInstanceState);
-		login.setText(savedInstanceState.getCharSequence("loginTextValue"));
-		password.setText(savedInstanceState.getCharSequence("passwordTextValue"));
-	}
-
-	protected void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
-		outState.putCharSequence("loginTextValue", login.getText());
-		outState.putCharSequence("passwordTextValue", password.getText());
+		return false;
 	}
 }

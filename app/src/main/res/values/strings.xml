@@ -25,4 +25,7 @@
     <string name="button_login_sign_in">Войти</string>
     <string name="hint_editText_password">Пароль</string>
     <string name="hint_editText_login">Логин</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="button_add_image">Добавить</string>
 </resources>
