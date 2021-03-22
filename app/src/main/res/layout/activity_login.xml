@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <EditText
+            android:hint="@string/hint_editText_login"
+            android:id="@+id/editText_login"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+            style="@style/editText"/>
+
+    <EditText
+            android:hint="@string/hint_editText_password"
+            android:id="@+id/editText_password"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editText_login"
+
+            style="@style/editText"/>
+
+    <Button
+            android:text="@string/button_login_sign_in"
+            android:id="@+id/button"
+            app:layout_constraintTop_toBottomOf="@+id/editText_password"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            style="@style/buttonStyle"
+            android:onClick="signIn" />
+</androidx.constraintlayout.widget.ConstraintLayout>

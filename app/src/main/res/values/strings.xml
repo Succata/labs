@@ -18,6 +18,11 @@
     <string name="equals">=</string>
     <string name="default_calculator_hint">Введите выражение</string>
     <string name="expression_exception">Выражение не может быть посчитано</string>
+    <string name="loginAndPassword_exception">Неверный логин или пароль</string>
+    <string name="smthAreNull">Не все поля заполнены</string>
 
     <string name="enter">Enter</string>
+    <string name="button_login_sign_in">Войти</string>
+    <string name="hint_editText_password">Пароль</string>
+    <string name="hint_editText_login">Логин</string>
 </resources>

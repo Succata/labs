@@ -11,4 +11,16 @@
         <item name="android:insetBottom">0dp</item>
         <item name="android:insetTop">0dp</item>
     </style>
+    
+    <style name="editText" parent="Theme.AppCompat">
+
+       <item name="android:textSize">30sp</item>
+       <item name="android:paddingEnd">10dp</item>
+       <item name="android:paddingStart">10dp</item>
+       <item name="android:textAlignment">center</item>
+       <item name="android:layout_width">match_parent</item>
+       <item name="android:layout_height">wrap_content</item>
+       <item name="android:textColorHint">@color/hint_color</item>
+       <item name="android:inputType">textPassword</item>
+    </style>
 </resources>
