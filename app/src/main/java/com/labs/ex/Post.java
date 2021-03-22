@@ -11,4 +11,9 @@ public class Post implements Serializable {
 		this.header = header;
 		this.body = body;
 	}
+
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
 }
