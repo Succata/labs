@@ -5,28 +5,38 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
+
+import com.vk.api.sdk.VK;
+import com.vk.api.sdk.auth.VKAccessToken;
+import com.vk.api.sdk.auth.VKAuthCallback;
 
 import java.util.ArrayList;
 
 public class Main extends AppCompatActivity {
 
-	public static Context context;
+	public static Activity context;
 
 	private static final Login loginFragment = new Login();
-	private static final Scroll scrollFragment = new Scroll();
-	private static final AddImage addImage = new AddImage();
+	public static final Scroll scrollFragment = new Scroll();
+	public static final AddImage addImage = new AddImage();
 	public static ArrayList<Post> data = new ArrayList<>();
 	FileWriter fileWriter = new FileWriter();
 
+	public static boolean _isRedact = false;
+	public static int _redactPosition = -1;
+	public static String vkToken = null;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		context = getApplicationContext();
+		context = this;
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		if (savedInstanceState == null)
@@ -34,7 +44,6 @@ public class Main extends AppCompatActivity {
 		if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
 			ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.READ_EXTERNAL_STORAGE }, 1);
 		}
-		fileWriter.read();
 	}
 
 	public void signIn(View view) {
@@ -51,11 +60,17 @@ public class Main extends AppCompatActivity {
 	}
 	public void completedAddPost(View view) {
 		if (addImage.uri != null && !addImage.header.getText().equals("") && !addImage.text.getText().equals("")) {
-			scrollFragment.recyclerAdapter.addPost(addImage.uri, addImage.header.getText().toString(), addImage.text.getText().toString());
+			getSupportFragmentManager().beginTransaction().replace(R.id.fragment, scrollFragment).commit();
+			if (_isRedact)
+				fileWriter.redact(_redactPosition, addImage.uri, addImage.header.getText().toString(), addImage.text.getText().toString());
+			else {
+				scrollFragment.recyclerAdapter.addPost(addImage.uri, addImage.header.getText().toString(), addImage.text.getText().toString());
+				fileWriter.write();
+			}
 			addImage.header.setText("");
 			addImage.text.setText("");
-			getSupportFragmentManager().beginTransaction().replace(R.id.fragment, scrollFragment).commit();
-			fileWriter.write();
+			_isRedact = false;
+			_redactPosition = -1;
 		} else Toast.makeText(getApplicationContext(), "Не все поля заполнены", Toast.LENGTH_SHORT).show();
 	}
 
@@ -66,6 +81,18 @@ public class Main extends AppCompatActivity {
 			if (resultCode == RESULT_OK) {
 				addImage.setImage(data.getData());
 			}
+		}
+		if (requestCode == 282) {
+			VK.onActivityResult(requestCode, resultCode, data, new VKAuthCallback() {
+				@Override
+				public void onLogin(VKAccessToken vkAccessToken) {
+					vkToken = vkAccessToken.getAccessToken();
+					Log.d("log", "vkmsg");
+					fileWriter.loadFromVK();
+				}
+
+				@Override public void onLoginFailed(int i) { }
+			});
 		}
 	}
 }

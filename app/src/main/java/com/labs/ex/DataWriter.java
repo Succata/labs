@@ -4,4 +4,5 @@ public interface DataWriter {
 	void read();
 	void write();
 	void delete(int pos);
+	void redact(int pos, String... args);
 }

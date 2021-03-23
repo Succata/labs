@@ -33,6 +33,8 @@ public class Scroll extends Fragment {
 	@Override
 	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+
+		new FileWriter().read();
 		recyclerView = getActivity().findViewById(R.id.recycler);
 		recyclerView.setLayoutManager(new LinearLayoutManager(null, LinearLayoutManager.VERTICAL,
 				false));
@@ -40,7 +42,7 @@ public class Scroll extends Fragment {
 		recyclerView.setAdapter(recyclerAdapter);
 
 		ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
-				ItemTouchHelper.LEFT) {
+				ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
 
 			@Override
 			public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder,
@@ -50,9 +52,15 @@ public class Scroll extends Fragment {
 
 			@Override
 			public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-				new FileWriter().delete(viewHolder.getAdapterPosition());
-				Main.data.remove(viewHolder.getAdapterPosition());
-				recyclerAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
+				if (i == ItemTouchHelper.LEFT){
+					new FileWriter().delete(viewHolder.getAdapterPosition());
+//					Main.data.remove(viewHolder.getAdapterPosition());
+					recyclerAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
+				} else if (i == ItemTouchHelper.RIGHT) {
+					Main._isRedact = true;
+					Main._redactPosition = viewHolder.getAdapterPosition();
+					getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment, ((Main)getActivity()).addImage).commit();
+				}
 			}
 		});
 		itemTouchHelper.attachToRecyclerView(recyclerView);

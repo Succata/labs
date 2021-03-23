@@ -1,6 +1,5 @@
 package com.labs.ex;
 
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -16,7 +15,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerHolder> {
 
 	@Override
 	public void onBindViewHolder(RecyclerHolder holder, int position) {
-		holder.imageView.setImageURI(Uri.parse(Main.data.get(holder.getAdapterPosition()).imageUri));
+		LoadImageAsync async = new LoadImageAsync(holder.imageView, position, Main.data.get(holder.getAdapterPosition()).imageUri);
+//		holder.imageView.setImageURI(Uri.parse(Main.data.get(holder.getAdapterPosition()).imageUri));
+		async.execute();
 		holder.header.setText(Main.data.get(holder.getAdapterPosition()).header);
 		holder.body.setText(Main.data.get(holder.getAdapterPosition()).body);
 		Main.data.size();

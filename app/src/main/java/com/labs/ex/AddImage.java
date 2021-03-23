@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,18 @@ public class AddImage extends Fragment {
 		header = getActivity().findViewById(R.id.add_header);
 		text = getActivity().findViewById(R.id.add_text);
 		uri = null;
+	}
+
+	@Override
+	public void onStart() {
+		super.onStart();
+
+		if (Main._isRedact) {
+			uri = Main.data.get(Main._redactPosition).imageUri;
+			new LoadImageAsync(imageButton, Main._redactPosition, uri).execute();
+			header.setText(Main.data.get(Main._redactPosition).header);
+			text.setText(Main.data.get(Main._redactPosition).body);
+		}
 	}
 
 	public void setImage(Uri data) {
