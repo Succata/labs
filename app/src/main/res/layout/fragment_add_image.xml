@@ -4,7 +4,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".AddImage"
+        tools:context=".fragments.AddImage"
         style="@style/editText"
         app:layout_constraintHeight_max="300dp"
         android:paddingStart="0dp"
@@ -20,7 +20,8 @@
             android:onClick="addImage"
             app:layout_constraintHorizontal_bias="0.157"
             android:src="@drawable/iconmonstr_picture_8"
-            app:layout_constraintHeight_max="300dp" />
+            app:layout_constraintHeight_max="300dp"
+            app:layout_constraintHeight_min="300dp" />
 
     <Button
             android:text="@string/button_add_image"

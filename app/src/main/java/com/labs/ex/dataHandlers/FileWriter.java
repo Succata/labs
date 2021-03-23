@@ -1,7 +1,10 @@
-package com.labs.ex;
+package com.labs.ex.dataHandlers;
 
 import android.content.Context;
 
+import com.labs.ex.acyncTasks.LoadFromVK;
+import com.labs.ex.beans.Post;
+import com.labs.ex.activities.Main;
 import com.vk.api.sdk.VK;
 import com.vk.api.sdk.auth.VKScope;
 
@@ -70,6 +73,11 @@ public class FileWriter implements DataWriter {
 	}
 
 	@Override
+	public void writeAll() {
+		write();
+	}
+
+	@Override
 	public void delete(int pos) {
 
 		JSONObject jsonObject = new JSONObject();
@@ -120,8 +128,9 @@ public class FileWriter implements DataWriter {
 		}
 	}
 
+	@Override
 	public void loadFromVK() {
-		LoadFromVK asyncTask = new LoadFromVK();
+		LoadFromVK asyncTask = new LoadFromVK(this);
 		asyncTask.execute();
 	}
 }

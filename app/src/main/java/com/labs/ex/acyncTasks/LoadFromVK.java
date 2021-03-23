@@ -1,6 +1,10 @@
-package com.labs.ex;
+package com.labs.ex.acyncTasks;
 
 import android.os.AsyncTask;
+
+import com.labs.ex.beans.Post;
+import com.labs.ex.activities.Main;
+import com.labs.ex.dataHandlers.DataWriter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -11,6 +15,10 @@ import java.net.URL;
 import java.util.Scanner;
 
 public class LoadFromVK extends AsyncTask<Void, Void, JSONObject> {
+	DataWriter dataWriter;
+	public LoadFromVK(DataWriter dataWriter) {
+		this.dataWriter = dataWriter;
+	}
 	@Override
 	protected JSONObject doInBackground(Void... integers) {
 		JSONObject response = null;
@@ -46,8 +54,7 @@ public class LoadFromVK extends AsyncTask<Void, Void, JSONObject> {
 				}
 				Main.data.add(new Post(image, "Пост из вк", text));
 			}
-			FileWriter fileWriter = new FileWriter();
-			fileWriter.write();
+			dataWriter.writeAll();
 			Main.scrollFragment.recyclerAdapter.notifyDataSetChanged();
 		} catch (JSONException e) {
 			e.printStackTrace();

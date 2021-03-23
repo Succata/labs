@@ -15,7 +15,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:scaleType="centerCrop"
-            app:layout_constraintHeight_max="300dp" />
+            app:layout_constraintHeight_max="300dp"
+            app:layout_constraintHeight_min="300dp" />
 
     <TextView
             android:layout_width="match_parent"

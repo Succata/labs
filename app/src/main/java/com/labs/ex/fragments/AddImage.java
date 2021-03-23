@@ -1,4 +1,4 @@
-package com.labs.ex;
+package com.labs.ex.fragments;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -6,13 +6,16 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import com.labs.ex.acyncTasks.LoadImageAsync;
+import com.labs.ex.R;
+import com.labs.ex.activities.Main;
 
 public class AddImage extends Fragment {
 

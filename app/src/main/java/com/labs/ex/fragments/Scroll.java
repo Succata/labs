@@ -1,4 +1,4 @@
-package com.labs.ex;
+package com.labs.ex.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -14,10 +14,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.labs.ex.R;
+import com.labs.ex.recycler.RecyclerAdapter;
+import com.labs.ex.activities.Main;
+
 public class Scroll extends Fragment {
 
 	RecyclerView recyclerView;
-	RecyclerAdapter recyclerAdapter;
+	public RecyclerAdapter recyclerAdapter;
 
 	@Override
 	public void onAttach(@NonNull Context context) {
@@ -34,7 +38,7 @@ public class Scroll extends Fragment {
 	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 
-		new FileWriter().read();
+		Main.fileWriter.read();
 		recyclerView = getActivity().findViewById(R.id.recycler);
 		recyclerView.setLayoutManager(new LinearLayoutManager(null, LinearLayoutManager.VERTICAL,
 				false));
@@ -53,7 +57,7 @@ public class Scroll extends Fragment {
 			@Override
 			public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
 				if (i == ItemTouchHelper.LEFT){
-					new FileWriter().delete(viewHolder.getAdapterPosition());
+					Main.fileWriter.delete(viewHolder.getAdapterPosition());
 //					Main.data.remove(viewHolder.getAdapterPosition());
 					recyclerAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
 				} else if (i == ItemTouchHelper.RIGHT) {

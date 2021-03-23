@@ -1,9 +1,14 @@
-package com.labs.ex;
+package com.labs.ex.recycler;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.labs.ex.R;
+import com.labs.ex.activities.Main;
+import com.labs.ex.acyncTasks.LoadImageAsync;
+import com.labs.ex.beans.Post;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerHolder> {
 
@@ -15,6 +20,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerHolder> {
 
 	@Override
 	public void onBindViewHolder(RecyclerHolder holder, int position) {
+		holder.imageView.setImageDrawable(Main.context.getDrawable(R.drawable.iconmonstr_picture_8));
 		LoadImageAsync async = new LoadImageAsync(holder.imageView, position, Main.data.get(holder.getAdapterPosition()).imageUri);
 //		holder.imageView.setImageURI(Uri.parse(Main.data.get(holder.getAdapterPosition()).imageUri));
 		async.execute();

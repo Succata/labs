@@ -1,4 +1,4 @@
-package com.labs.ex;
+package com.labs.ex.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -6,7 +6,6 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -14,6 +13,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.labs.ex.fragments.AddImage;
+import com.labs.ex.dataHandlers.DataWriter;
+import com.labs.ex.fragments.Login;
+import com.labs.ex.beans.Post;
+import com.labs.ex.R;
+import com.labs.ex.fragments.Scroll;
 import com.vk.api.sdk.VK;
 import com.vk.api.sdk.auth.VKAccessToken;
 import com.vk.api.sdk.auth.VKAuthCallback;
@@ -28,9 +33,10 @@ public class Main extends AppCompatActivity {
 	public static final Scroll scrollFragment = new Scroll();
 	public static final AddImage addImage = new AddImage();
 	public static ArrayList<Post> data = new ArrayList<>();
-	FileWriter fileWriter = new FileWriter();
+	public static DataWriter fileWriter;
 
 	public static boolean _isRedact = false;
+	public static boolean _isFirebase = false;
 	public static int _redactPosition = -1;
 	public static String vkToken = null;
 

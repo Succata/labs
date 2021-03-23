@@ -1,4 +1,4 @@
-package com.labs.ex;
+package com.labs.ex.fragments;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -9,7 +9,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.Toast;
+
+import com.labs.ex.dataHandlers.BaseWriter;
+import com.labs.ex.dataHandlers.FireBaseWriter;
+import com.labs.ex.R;
+import com.labs.ex.activities.Main;
 
 public class Login extends Fragment {
 
@@ -31,10 +37,13 @@ public class Login extends Fragment {
 	}
 
 	public boolean signIn(View view) {
+		Main._isFirebase = ((Switch) getActivity().findViewById(R.id.base_switcher)).isChecked();
 		if ((login.getText().toString().equals("") || password.getText().toString().equals("")) && toast.getView().getWindowVisibility() != View.VISIBLE) {
 			toast.setText(getString(R.string.smthAreNull));
 			toast.show();
 		} else if (login.getText().toString().equals("admin") && password.getText().toString().equals("admin")) {
+			Main.fileWriter = (Main._isFirebase)?new FireBaseWriter():new BaseWriter();
+//			Main.fileWriter = new FileWriter();
 			return true;
 		} else if (toast.getView().getWindowVisibility() != View.VISIBLE) {
 			toast.setText(getString(R.string.loginAndPassword_exception));

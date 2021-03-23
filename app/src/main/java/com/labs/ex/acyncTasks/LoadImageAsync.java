@@ -1,4 +1,4 @@
-package com.labs.ex;
+package com.labs.ex.acyncTasks;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
