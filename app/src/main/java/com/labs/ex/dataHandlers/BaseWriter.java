@@ -24,7 +24,7 @@ public class BaseWriter implements DataWriter {
 
 		cursor.moveToFirst();
 		while (! cursor.isAfterLast()) {
-			Main.data.add(new Post(cursor.getString(1), cursor.getString(2), cursor.getString(3)));
+			Main.data.add(new Post(cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4)));
 			cursor.moveToNext();
 		}
 
@@ -52,8 +52,10 @@ public class BaseWriter implements DataWriter {
 				.append(DBHelper.COLUMN_HEADER)
 				.append(", ")
 				.append(DBHelper.COLUMN_TEXT)
-				.append(") VALUES (?, ?, ?)")
-				.toString(), new Object[] {post.imageUri, post.header, post.body});
+				.append(", ")
+				.append(DBHelper.COLUMN_COORDINATES)
+				.append(") VALUES (?, ?, ?, ?)")
+				.toString(), new Object[] {post.imageUri, post.header, post.body, post.mapAddress});
 
 		database.close();
 	}
@@ -72,8 +74,10 @@ public class BaseWriter implements DataWriter {
 				.append(DBHelper.COLUMN_HEADER)
 				.append(", ")
 				.append(DBHelper.COLUMN_TEXT)
-				.append(") VALUES (?, ?, ?)")
-				.toString(), new Object[] {post.imageUri, post.header, post.body});
+				.append(", ")
+				.append(DBHelper.COLUMN_COORDINATES)
+				.append(") VALUES (?, ?, ?, ?)")
+				.toString(), new Object[] {post.imageUri, post.header, post.body, post.mapAddress});
 
 		database.close();
 	}

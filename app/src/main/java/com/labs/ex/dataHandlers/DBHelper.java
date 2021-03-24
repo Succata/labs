@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DBHelper extends SQLiteOpenHelper
 {
 	private static final String DATABASE_NAME = "users.db";
-	private static final int SCHEMA = 1;
+	private static final int SCHEMA = 2;
 	public static final String DATA = "data";
 
 	public static final String COLUMN_ID = "_id";
@@ -33,8 +33,8 @@ public class DBHelper extends SQLiteOpenHelper
 				.append(COLUMN_HEADER)
 				.append(" TEXT,")
 				.append(COLUMN_TEXT)
-//				.append(" TEXT, ")
-//				.append(COLUMN_COORDINATES)
+				.append(" TEXT, ")
+				.append(COLUMN_COORDINATES)
 				.append(" TEXT ")
 				.append(");").toString());
 	}

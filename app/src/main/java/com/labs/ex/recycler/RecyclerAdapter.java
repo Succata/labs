@@ -10,6 +10,8 @@ import com.labs.ex.activities.Main;
 import com.labs.ex.acyncTasks.LoadImageAsync;
 import com.labs.ex.beans.Post;
 
+import java.util.Random;
+
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerHolder> {
 
 	@Override
@@ -35,7 +37,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerHolder> {
 	}
 
 	public void addPost(String uri, String header, String body) {
-		Main.data.add(new Post(uri, header, body));
+		Main.data.add(new Post(uri, header, body, (Math.random()-0.5f)*180+","+(Math.random()-0.5f)*360));
 		notifyDataSetChanged();
 	}
 }

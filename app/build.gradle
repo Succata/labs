@@ -14,6 +14,12 @@ android {
         versionCode 1
         versionName "1.0"
 
+        Properties properties = new Properties()
+        if (rootProject.file("local.properties").exists()) {
+            properties.load(rootProject.file("local.properties").newDataInputStream())
+        }
+        manifestPlaceholders = [ mapsApiKey : properties.getProperty("MAPS_API_KEY", "") ]
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -37,6 +43,7 @@ dependencies {
     implementation files('src/main/java/com/labs/ex/dependencies/MathParser.jar')
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.vk:androidsdk:2.6.0'
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'

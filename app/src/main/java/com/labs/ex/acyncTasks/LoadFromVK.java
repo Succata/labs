@@ -45,14 +45,18 @@ public class LoadFromVK extends AsyncTask<Void, Void, JSONObject> {
 				JSONObject obj = items.getJSONObject(i);
 				String image = null;
 				String text = obj.getString("text");
-				JSONArray attachments = obj.getJSONArray("attachments");
-				for (int j = 0; j < attachments.length(); j++) {
-					if (attachments.getJSONObject(j).getString("type").equals("photo")) {
-						JSONArray sizes = attachments.getJSONObject(j).getJSONObject("photo").getJSONArray("sizes");
-						image = sizes.getJSONObject(sizes.length()-1).getString("url");
+				try {
+					JSONArray attachments = obj.getJSONArray("attachments");
+					for (int j = 0; j < attachments.length(); j++) {
+						if (attachments.getJSONObject(j).getString("type").equals("photo")) {
+							JSONArray sizes = attachments.getJSONObject(j).getJSONObject("photo").getJSONArray("sizes");
+							image = sizes.getJSONObject(sizes.length()-1).getString("url");
+						}
 					}
+				} catch (JSONException e) {
+					e.printStackTrace();
 				}
-				Main.data.add(new Post(image, "Пост из вк", text));
+				Main.data.add(new Post(image, "Пост из вк", text, (Math.random()-0.5f)*180+","+(Math.random()-0.5f)*360));
 			}
 			dataWriter.writeAll();
 			Main.scrollFragment.recyclerAdapter.notifyDataSetChanged();

@@ -36,7 +36,7 @@ public class FileWriter implements DataWriter {
 
 			for (int i = 0; i < data.length(); i++) {
 				JSONObject b = data.getJSONObject(i);
-				Main.data.add(new Post(b.getString("uri"),b.getString("header"),b.getString("text")));
+				Main.data.add(new Post(b.getString("uri"),b.getString("header"),b.getString("text"), b.getString("mapAddress")));
 			}
 
 		}catch (JSONException e) {
@@ -61,6 +61,7 @@ public class FileWriter implements DataWriter {
 				buff.put("uri", p.imageUri);
 				buff.put("header", p.header);
 				buff.put("text", p.body);
+				buff.put("mapAddress", p.mapAddress);
 				jsonArray.put(buff);
 			}
 			jsonObject.put("data", jsonArray);

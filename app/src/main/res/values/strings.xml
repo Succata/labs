@@ -27,6 +27,7 @@
     <string name="hint_editText_login">Логин</string>
     <string name="button_add_image">Добавить</string>
 
-<!--TODO поменять на другое приложение  -->
+    <!--TODO поменять на другое приложение  -->
     <integer name="com_vk_sdk_AppId">7749130</integer>
+    <string name="title_activity_maps">Map</string>
 </resources>
